@@ -25,18 +25,19 @@ import java.util.ArrayList;
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
-        Context c;
+    Context c;
     CRUD crud;
     ArrayList<Spacecraft> spacecrafts;
 
-    public MyAdapter(Context c,ArrayList<Spacecraft> spacecrafts ){
+    public MyAdapter(Context c, ArrayList<Spacecraft> spacecrafts) {
         this.c = c;
         this.spacecrafts = spacecrafts;
 
     }
+
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.model,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.model, parent, false);
 
         return new MyHolder(v);
     }
@@ -62,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
             @Override
             public void onItemClick(int pos) {
 
-                openDatailActivity(name,des,pos);
+//                openDatailActivity(name,des,pos);
 
             }
         });
@@ -70,12 +71,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
         holder.tv_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDatailActivity(name,des,pos);
+                openDatailActivity(name, des, pos);
             }
         });
 
     }
-
 
 
     @Override
@@ -84,17 +84,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
     }
 
 
-    public void openDatailActivity(String name, String des,int Position){
+    public void openDatailActivity(String name, String des, int Position) {
         Intent i = new Intent(c, DetailActivity.class);
-        i.putExtra("NameKey",name);
-        i.putExtra("DesKey",des);
-        i.putExtra("PosKey",Position);
+        i.putExtra("NameKey", name);
+        i.putExtra("DesKey", des);
+        i.putExtra("PosKey", Position);
         c.startActivity(i);
     }
 
 
-
-    public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView nameTxt;
         TextView desTxt;
         TextView tv_delete;
@@ -107,13 +106,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
             super(itemView);
             nameTxt = (TextView) itemView.findViewById(R.id.name_txt);
             desTxt = (TextView) itemView.findViewById(R.id.descrepion_txt);
-            tv_delete = (TextView)itemView.findViewById(R.id.delet_txt);
-            tv_update = (TextView)itemView.findViewById(R.id.tv_update);
+            tv_delete = (TextView) itemView.findViewById(R.id.delet_txt);
+            tv_update = (TextView) itemView.findViewById(R.id.tv_update);
             itemView.setOnClickListener(this);
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener){
-            this.itemClickListener= itemClickListener;
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
         }
 
         private int position;
@@ -131,26 +130,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
         public void setListeners() {
             nameTxt = (TextView) itemView.findViewById(R.id.name_txt);
             desTxt = (TextView) itemView.findViewById(R.id.descrepion_txt);
-            tv_delete = (TextView)itemView.findViewById(R.id.delet_txt);
-            tv_update = (TextView)itemView.findViewById(R.id.tv_update);
+            tv_delete = (TextView) itemView.findViewById(R.id.delet_txt);
+            tv_update = (TextView) itemView.findViewById(R.id.tv_update);
             tv_delete.setOnClickListener(MyHolder.this);
         }
-
 
 
         @Override
         public void onClick(View v) {
 
-            if(v.getId() == R.id.delet_txt){
+            if (v.getId() == R.id.delet_txt) {
                 removeItem(position);
 //               final String name1 = spacecrafts.get(position).getName();
 
-            }else{
+            } else {
                 this.itemClickListener.onItemClick(getLayoutPosition());
             }
 
 
         }
+
         public void removeItem(int position) {
             spacecrafts.remove(position);
             notifyItemRemoved(position);

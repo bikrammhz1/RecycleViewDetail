@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class GetterSetterCollections {
     static ArrayList<Spacecraft> spacecrafts = new ArrayList<>();
-    public static ArrayList<Spacecraft> getSpacecrafts(){
+
+    public static ArrayList<Spacecraft> getSpacecrafts() {
         return spacecrafts;
     }
 

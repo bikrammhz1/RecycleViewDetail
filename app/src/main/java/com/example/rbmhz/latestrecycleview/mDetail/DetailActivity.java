@@ -14,14 +14,20 @@ import com.example.rbmhz.latestrecycleview.mData.CRUD;
 import com.example.rbmhz.latestrecycleview.mData.Spacecraft;
 import com.example.rbmhz.latestrecycleview.mData.GetterSetterCollections;
 
+/**
+ * @author Bikram Maharjan
+ * @version 1.1
+ * @Date 4/10/2017.
+ */
 
 public class DetailActivity extends AppCompatActivity {
-    EditText nameTxt,detailTxt;
-    String name,des;
+    EditText nameTxt, detailTxt;
+    String name, des;
     int pos;
 
-    Button getBtnSave ,getBtndelete,btnAdd;
+    Button getBtnSave, getBtndelete, btnAdd;
     CRUD crud;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,22 +35,22 @@ public class DetailActivity extends AppCompatActivity {
 
         nameTxt = (EditText) findViewById(R.id.name_detail);
         detailTxt = (EditText) findViewById(R.id.description_detail);
-        getBtnSave = (Button)findViewById(R.id.btn_save11);
-        getBtndelete = (Button)findViewById(R.id.btn_delete11);
-        btnAdd = (Button)findViewById(R.id.btn_add);
+        getBtnSave = (Button) findViewById(R.id.btn_save11);
+        getBtndelete = (Button) findViewById(R.id.btn_delete11);
+        btnAdd = (Button) findViewById(R.id.btn_add);
         //recive data
 
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
-        if(bundle!=null){
-            name= i.getExtras().getString("NameKey");
-            des= i.getExtras().getString("DesKey");
-            pos= i.getExtras().getInt("PosKey");
+        if (bundle != null) {
+            name = i.getExtras().getString("NameKey");
+            des = i.getExtras().getString("DesKey");
+            pos = i.getExtras().getInt("PosKey");
             detailTxt.setText(des);
             btnAdd.setVisibility(View.GONE);
             getBtndelete.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
             getBtnSave.setVisibility(View.GONE);
             getBtndelete.setVisibility(View.GONE);
         }
@@ -54,18 +60,17 @@ public class DetailActivity extends AppCompatActivity {
         crud = new CRUD(GetterSetterCollections.getSpacecrafts());
 
 
-
 //
         getBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Spacecraft s= new Spacecraft();
+                Spacecraft s = new Spacecraft();
                 name = nameTxt.getText().toString();
                 des = detailTxt.getText().toString();
 
                 s.setName(name);
                 s.setDescription(des);
-                if(crud.update(pos,s)){
+                if (crud.update(pos, s)) {
 
                     nameTxt.setText(name);
                     detailTxt.setText(des);
@@ -87,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                Toast.makeText(getApplication(),"asdf",Toast.LENGTH_SHORT).show();
-                if(crud.delete(pos)){
+                if (crud.delete(pos)) {
                     //kill this activity and go back to master activity
                     DetailActivity.this.finish();
                 }
@@ -95,6 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
     }
+
     public void passdata() {
 
         Intent i = new Intent(DetailActivity.this, MainActivity.class);
@@ -105,8 +111,6 @@ public class DetailActivity extends AppCompatActivity {
         setResult(1, i);
         finish();
     }
-
-
 
 
 }

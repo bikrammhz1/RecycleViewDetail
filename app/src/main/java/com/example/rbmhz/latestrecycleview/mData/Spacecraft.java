@@ -8,7 +8,9 @@ package com.example.rbmhz.latestrecycleview.mData;
 
 public class Spacecraft {
     String name;
-    public Spacecraft(){}
+
+    public Spacecraft() {
+    }
 
     public String getName() {
         return name;
